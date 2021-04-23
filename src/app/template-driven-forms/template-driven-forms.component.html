@@ -1,0 +1,20 @@
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+    <div>
+        <label for="name">Name</label><br>
+        <input type="text" name="name" #nameModel="ngModel" ngModel required>
+    </div>
+    <p *ngIf="nameModel?.errors?.required && nameModel?.touched">Error</p>
+    <div>
+        <label for="name">Email</label><br>
+        <input type="email" name="email" ngModel>
+    </div>
+    <div>
+        <label for="name">Tel</label><br>
+        <input type="tel" name="tel" ngModel>
+    </div>
+    <div *ngIf="form.valid">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+<p>Form : {{ form.value | json }}</p>
+<p>Error: {{ form.controls.name?.errors?.required }}</p>

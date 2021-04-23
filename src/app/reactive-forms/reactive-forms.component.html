@@ -1,0 +1,42 @@
+<br>
+<form (ngSubmit)="onSubmit()" [formGroup]="contact">
+    <div>
+        <label for="name">Name</label><br>
+        <input type="text" formControlName="name">
+    </div>
+    <div>
+        <p *ngIf="contact.get('name')?.errors?.required && contact.get('name')?.touched">Error required</p>
+    </div>
+    <div>
+        <p *ngIf="contact.get('name')?.errors?.maxlength">Error Lenght</p>
+    </div>
+    <div formGroupName="social">
+        <div>
+            <label for="facebook">FaceBook</label><br>
+            <input type="text" formControlName="facebook">
+        </div>
+        <div>
+            <p *ngIf="contact.get(['social','facebook'])?.errors?.required && contact.get('social.facebook')?.touched">Error required</p>
+        </div>
+        <div>
+            <label for="Email">Email</label><br>
+            <input type="text" formControlName="email">
+        </div>
+    </div>
+    <div formArrayName="test">
+        <ng-template #error>
+            <p>Số ô thêm vào không được lớn hơn 3</p>
+        </ng-template>
+        <button (click)="addTest()" *ngIf="test.controls.length < 3, else error">Add</button>
+        <div *ngFor="let item of test.controls; let i=index">
+            <br>
+            <input type="text" [formControlName]="i">
+            <br>
+            <button (click)="remove(i)">Del</button>
+            <br>
+        </div>
+        
+    </div>
+    <br>
+    <button class="btn btn-success" type="submit" [disabled]="contact.invalid">Submit</button>
+</form>

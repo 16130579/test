@@ -1,0 +1,16 @@
+import { ThrowStmt } from '@angular/compiler';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MessgesService {
+  messages: string[] = [];
+  constructor() { }
+  add(messages: string){
+    this.messages.push(messages);
+  }
+  clear(){
+    this.messages = [];
+  }
+}
